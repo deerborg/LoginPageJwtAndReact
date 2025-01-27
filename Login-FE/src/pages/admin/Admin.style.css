@@ -1,0 +1,21 @@
+.messages {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 10%;
+}
+.msg-box {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+.m-box {
+  border: 1px solid navy;
+  padding: 2rem;
+  text-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}

@@ -1,0 +1,47 @@
+@import "/src/pages/home/Home.style.css";
+@import "/src/pages/login/Login.style.css";
+@import "/src/pages/admin/Admin.style.css";
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  font-family: "Montserrat", serif;
+  box-shadow: none;
+}
+
+body {
+  background-color: rgb(172, 172, 172);
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgb(1, 1, 53);
+  color: white;
+}
+
+.nav-element {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+.nav-element a {
+  cursor: pointer;
+
+  padding: 0.5rem 2rem;
+  border-radius: 0.2rem;
+  transition: all 0.5s;
+}
+.nav-element a:hover {
+  border: 1px solid white;
+  font-size: 1.1rem;
+  box-shadow: 0 0 1rem 0.1rem rgba(255, 255, 255, 0.479);
+}
