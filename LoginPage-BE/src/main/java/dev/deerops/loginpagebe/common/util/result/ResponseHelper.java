@@ -10,4 +10,8 @@ public class ResponseHelper {
     public static <T> ApiResponse<T> SUCCESS(T data){
         return new ApiResponse<>(true,"Success",data);
     }
+
+    public static <T> ApiResponse<T> UPDATED(T data){
+        return new ApiResponse<>(true,"Updated",data);
+    }
 }

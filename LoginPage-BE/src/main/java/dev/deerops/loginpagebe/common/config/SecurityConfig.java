@@ -54,7 +54,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173")); // İzin verilen domainler
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE")); // İzin verilen HTTP metodları
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE","OPTIONS")); // İzin verilen HTTP metodları
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type")); // İzin verilen başlıklar
         configuration.setAllowCredentials(true); // Kimlik doğrulaması yapacaksa true
 

@@ -5,11 +5,16 @@ import Navbar from "../../components/navbar/Navbar";
 const Home = () => {
   const [email, setEmail] = useState("");
   const [msg, setMsg] = useState("");
+  const [error,setError] = useState("");
+  const [errorStatus,setErrorStatus] = useState(false);
+  const [loading,setLoading] = useState("loading");
+  const [loadingStats,setLoadStats] = useState(false);
 
   const BASE_URL =
     import.meta.env.VITE_LOGIN_APP_BASE_URL + "/api/messages/public/send";
 
   const handleSend = () => {
+    setLoading(true);
     const msgData = {
       email: email,
       message: msg,
@@ -18,9 +23,16 @@ const Home = () => {
       .post(BASE_URL, msgData)
       .then((res) => {
         console.log(res.data);
+        setLoading(false);
       })
       .catch((res) => {
-        console.log(res.response.data.message);
+        setError(res.response.data.message);
+        setErrorStatus(true)
+        setTimeout(()=>{
+          setError("");
+          setErrorStatus(false);
+        },2000)
+        setLoading(false);
       });
   };
 
@@ -28,101 +40,18 @@ const Home = () => {
     <>
       <Navbar></Navbar>
       <section className="home">
-        <h1>Contents</h1>
-        <div className="home-content">
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae,
-            corrupti. Illum ipsa mollitia obcaecati maxime voluptatibus a
-            reprehenderit, pariatur sequi, ipsam nulla ullam praesentium dolorum
-            nesciunt quaerat iure? Adipisci, asperiores.
-          </p>
-
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae,
-            corrupti. Illum ipsa mollitia obcaecati maxime voluptatibus a
-            reprehenderit, pariatur sequi, ipsam nulla ullam praesentium dolorum
-            nesciunt quaerat iure? Adipisci, asperiores.
-          </p>
-
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae,
-            corrupti. Illum ipsa mollitia obcaecati maxime voluptatibus a
-            reprehenderit, pariatur sequi, ipsam nulla ullam praesentium dolorum
-            nesciunt quaerat iure? Adipisci, asperiores.
-          </p>
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae,
-            corrupti. Illum ipsa mollitia obcaecati maxime voluptatibus a
-            reprehenderit, pariatur sequi, ipsam nulla ullam praesentium dolorum
-            nesciunt quaerat iure? Adipisci, asperiores.
-          </p>
-
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae,
-            corrupti. Illum ipsa mollitia obcaecati maxime voluptatibus a
-            reprehenderit, pariatur sequi, ipsam nulla ullam praesentium dolorum
-            nesciunt quaerat iure? Adipisci, asperiores.
-          </p>
-
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae,
-            corrupti. Illum ipsa mollitia obcaecati maxime voluptatibus a
-            reprehenderit, pariatur sequi, ipsam nulla ullam praesentium dolorum
-            nesciunt quaerat iure? Adipisci, asperiores.
-          </p>
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae,
-            corrupti. Illum ipsa mollitia obcaecati maxime voluptatibus a
-            reprehenderit, pariatur sequi, ipsam nulla ullam praesentium dolorum
-            nesciunt quaerat iure? Adipisci, asperiores.
-          </p>
-
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae,
-            corrupti. Illum ipsa mollitia obcaecati maxime voluptatibus a
-            reprehenderit, pariatur sequi, ipsam nulla ullam praesentium dolorum
-            nesciunt quaerat iure? Adipisci, asperiores.
-          </p>
-
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae,
-            corrupti. Illum ipsa mollitia obcaecati maxime voluptatibus a
-            reprehenderit, pariatur sequi, ipsam nulla ullam praesentium dolorum
-            nesciunt quaerat iure? Adipisci, asperiores.
-          </p>
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae,
-            corrupti. Illum ipsa mollitia obcaecati maxime voluptatibus a
-            reprehenderit, pariatur sequi, ipsam nulla ullam praesentium dolorum
-            nesciunt quaerat iure? Adipisci, asperiores.
-          </p>
-
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae,
-            corrupti. Illum ipsa mollitia obcaecati maxime voluptatibus a
-            reprehenderit, pariatur sequi, ipsam nulla ullam praesentium dolorum
-            nesciunt quaerat iure? Adipisci, asperiores.
-          </p>
-
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae,
-            corrupti. Illum ipsa mollitia obcaecati maxime voluptatibus a
-            reprehenderit, pariatur sequi, ipsam nulla ullam praesentium dolorum
-            nesciunt quaerat iure? Adipisci, asperiores.
-          </p>
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae,
-            corrupti. Illum ipsa mollitia obcaecati maxime voluptatibus a
-            reprehenderit, pariatur sequi, ipsam nulla ullam praesentium dolorum
-            nesciunt quaerat iure? Adipisci, asperiores.
-          </p>
-        </div>
-
+      <h1>Feedback Form</h1>
         <div className="feedback-form">
-          <h1>Feedback Form</h1>
+          <div className="load-bar-msg">
+            {
+              loadingStats && <h2>{loading}</h2>
+            }
+          </div>
           <div className="form-box">
-            <label>Email</label>
+            
+            <label >Email</label>
             <input
+              
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
@@ -135,6 +64,8 @@ const Home = () => {
           <div className="form-box">
             <label>Message</label>
             <textarea
+            
+            placeholder="Give me message"
               value={msg}
               onChange={(e) => {
                 setMsg(e.target.value);
@@ -142,9 +73,17 @@ const Home = () => {
             ></textarea>
           </div>
 
-          <div className="form-box">
+
+          <div className="form-box error">
+           {errorStatus && <h2>{error}</h2>}
+          </div>
+
+
+          <div className="form-box-button">
             <button onClick={handleSend}>Send</button>
           </div>
+      
+
         </div>
       </section>
     </>

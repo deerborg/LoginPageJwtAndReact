@@ -27,4 +27,9 @@ public class MessageController {
     public ResponseEntity<ApiResponse<List<MessageEntity>>> getAllMessage(){
         return messageService.getAllMessages();
     }
+
+    @PostMapping("/private/messages/{id}")
+    public ResponseEntity<?> forInVisibleMessageId(@PathVariable String id){
+        return messageService.forInVisibleMessageId(id);
+    }
 }

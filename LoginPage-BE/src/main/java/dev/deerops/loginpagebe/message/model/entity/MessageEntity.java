@@ -27,17 +27,28 @@ public class MessageEntity {
 
     private String deletedByStaff;
 
+    private boolean visible;
 
-    public MessageEntity(String messageId, String email, String message, LocalDateTime createdAt, LocalDateTime deletedAt, String deletedByStaff) {
+
+    public MessageEntity(String messageId, String email, String message, LocalDateTime createdAt, LocalDateTime deletedAt, String deletedByStaff, boolean visible) {
         this.messageId = messageId;
         this.email = email;
         this.message = message;
         this.createdAt = createdAt;
         this.deletedAt = deletedAt;
         this.deletedByStaff = deletedByStaff;
+        this.visible = visible;
     }
 
     public MessageEntity() {
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
 
     public String getMessageId() {

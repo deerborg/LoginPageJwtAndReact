@@ -10,6 +10,25 @@ const Admin = () => {
   const BASE_URL =
     import.meta.env.VITE_LOGIN_APP_BASE_URL + "/api/messages/private/messages";
 
+
+    const handleDeleteMsgById = (id)=>{
+      const token = localStorage.getItem("token");
+      axios.delete(BASE_URL+"/"+id, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }).then((e)=>{
+
+        console.log(res.data)
+      }).catch((e)=>{
+        console.log(e)
+      })
+        }
+
+useEffect(()=>{
+  document.title = "Admin"
+},[])
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
@@ -30,8 +49,12 @@ const Admin = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+
     navigte("/");
   };
+
+
+
 
   return (
     <>
@@ -45,7 +68,9 @@ const Admin = () => {
                 <h2>Mail : {m.email}</h2>
                 <p>Mesaj : {m.message}</p>
                 <p>Tarih : {m.createdAt}</p>
-                <button>Delete</button>
+                <button onClick={(e)=>{
+                  handleDeleteMsgById(m.messageId)
+                }}>Delete</button>
               </div>
             ))
           ) : (

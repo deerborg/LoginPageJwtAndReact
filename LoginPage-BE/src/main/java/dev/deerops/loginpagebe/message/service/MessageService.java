@@ -9,4 +9,6 @@ import java.util.List;
 public interface MessageService {
     ResponseEntity<ApiResponse<MessageEntity>> createdMessage(MessageEntity message);
     ResponseEntity<ApiResponse<List<MessageEntity>>> getAllMessages();
+    ResponseEntity<?> forInVisibleMessageId(String id);
+    ResponseEntity<?> deleteForPermanentMessage(String id);
 }
